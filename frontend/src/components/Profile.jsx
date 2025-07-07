@@ -1,8 +1,6 @@
 import EditPencil from "../assets/edit.png"
 import { useState, useEffect } from "react"
-
 function Profile(){
-
 const [user, setUser] = useState({
     user_name: "",
     user_age: "",
@@ -12,16 +10,12 @@ const [user, setUser] = useState({
     user_photo_url: "",
     user_bio: "",
 })
-
 const [isEditing, setIsEditing] = useState(false)
-
 const [message, setMessage] = useState("")
-
 function editingMode(){
     setIsEditing(true)
     setMessage("")
 }
-
 function handleChange(e){
     const{name, value} = e.target
     setUser(prev => ({
@@ -29,8 +23,6 @@ function handleChange(e){
         [name]: value
     }))
 }
-
-
 function handleCancel(){
     fetch("http://localhost:3001/usuario")
     .then(res => res.json())
@@ -40,11 +32,8 @@ function handleCancel(){
     })
      .catch(err => console.error("Erro ao cancelar", err))
 }
-
-
 function handleSave(e){
     e.preventDefault()
-
     if (
         !user.user_name ||
         !user.user_age ||
@@ -85,16 +74,6 @@ console.log("Enviando dados para salvar:", user);
         setIsEditing(false)
     })
 }
-
-
-
-useEffect(()=>{
-    fetch("http://localhost:3001/usuario")
-    .then(res => res.json())
-    .then(data => setUser(data))
-    .catch(err => console.error("Erro ao buscar usuário", err))
-}, [])
-
 async function uploadToCloudnary(file){
     const data = new FormData();
     data.append('file', file)
@@ -113,7 +92,6 @@ async function uploadToCloudnary(file){
         return null;
     }
 }
-
 async function handleImageChange(e){
     const file = e.target.files[0]
     if (!file) return
@@ -125,24 +103,29 @@ async function handleImageChange(e){
         }));
     }
 }
-
+useEffect(()=>{
+    fetch("http://localhost:3001/usuario")
+    .then(res => res.json())
+    .then(data => setUser(data))
+    .catch(err => console.error("Erro ao buscar usuário", err))
+}, [])
     return(
         <form className="font-poppins py-[40px] px-[54px]" >
             <div className="flex justify-between">
-                <div className="flex items-center gap-10 mb-[20px] lg:mb-[30px]">
-                    
-                    <img src={user.user_photo_url}  onClick={()=>{if(isEditing) document.getElementById("fileInput").click()}} className={` ${isEditing ? "hover:cursor-pointer":""} rounded-full  w-[100px] lg:w-[160px] h-[100px] lg:h-[160px] object-cover `}/>
+                <div className="flex items-center gap-10 mb-[20px] lg:mb-[30px]">   
+                    <img src={user.user_photo_url}  onClick={()=>{if(isEditing) document.getElementById("fileInput").click()}} className={` ${isEditing ? "hover:cursor-pointer hover:brightness-75":""} rounded-full  w-[100px] lg:w-[160px] h-[100px] lg:h-[160px] object-cover `}/>
                     <h1 className="hidden sm:block text-[40px]">Meu Perfil</h1>
                 </div>
                 <input type="file" accept="image/*" id="fileInput" onChange={handleImageChange} className="hidden"/>
-
                 {
                     !isEditing && (
                          <img src={EditPencil} alt="" onClick={editingMode} className="w-[30px] h-[30px] md:w-[40px] md:h-[40px] cursor-pointer" />
                     )
                 }        
             </div>
+
             <div className="flex flex-col gap-[10px] text-[15px] lg:text-[24px]">
+                
                 <div className="flex items-center justify-start pl-[24px]">
                     <label htmlFor="user_name" className="font-semibold w-[9vw] mr-[15px]" >Nome:</label>
                     <input type="text" name="user_name" value={user.user_name} onChange={handleChange} disabled={!isEditing} className={`flex flex-1 h-[30px] lg:w-[60vw] lg:h-[35px] rounded-[45px] p-2 focus:outline-none ${isEditing ? "border border-[#1A1A1A]" : "text-[#4B5563]"}`}  />                     
@@ -167,6 +150,7 @@ async function handleImageChange(e){
                     <label htmlFor="user_bio" className="font-semibold mb-[10px]" >Biografia:</label>         
                     <textarea name="user_bio" value={user.user_bio} onChange={handleChange} disabled={!isEditing}  className={`flex flex-1 h-[100%] resize-none focus:outline-none ${isEditing ? "" : "text-[#4B5563]"}`}></textarea>
                 </div>
+
                 <div className="flex justify-between items-center">
                     <span className={`text-[12px] ${message.includes("Erro") ? "text-red-600" : "text-green-600"}`}>{message}</span>
                     {

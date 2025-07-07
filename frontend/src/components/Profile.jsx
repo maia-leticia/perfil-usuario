@@ -1,4 +1,3 @@
-import IconProfile from "../assets/icon-profile.jpg"
 import EditPencil from "../assets/edit.png"
 import { useState, useEffect } from "react"
 
@@ -31,9 +30,6 @@ function handleChange(e){
     }))
 }
 
-function editPhoto(){
-
-}
 
 function handleCancel(){
     fetch("http://localhost:3001/usuario")
@@ -50,12 +46,12 @@ function handleSave(e){
     e.preventDefault()
 
     if (
-        !String(user.user_name).trim() ||
-        !String(user.user_age).trim() ||
-        !String(user.user_street).trim() ||
-        !String(user.user_neighborhood).trim() ||
-        !String(user.user_city).trim() ||
-        !String(user.user_bio).trim()
+        !user.user_name ||
+        !user.user_age ||
+        !user.user_street ||
+        !user.user_neighborhood ||
+        !user.user_city||
+        !user.user_bio
     ) {
         setMessage("Erro: Preencha todos os campos.")
         return
@@ -70,7 +66,7 @@ function handleSave(e){
         setMessage("Erro: A idade deve conter apenas números.");
         return ;
 }
-
+console.log("Enviando dados para salvar:", user);
     fetch("http://localhost:3001/usuario", {
         method: "POST",
         headers: {
@@ -91,6 +87,7 @@ function handleSave(e){
 }
 
 
+
 useEffect(()=>{
     fetch("http://localhost:3001/usuario")
     .then(res => res.json())
@@ -98,14 +95,47 @@ useEffect(()=>{
     .catch(err => console.error("Erro ao buscar usuário", err))
 }, [])
 
+async function uploadToCloudnary(file){
+    const data = new FormData();
+    data.append('file', file)
+    data.append("upload_preset", "icon-image")
+
+    try{
+        const res = await fetch("https://api.cloudinary.com/v1_1/ddd7lbecd/image/upload",{
+            method: "POST",
+            body: data
+        })
+
+        const json = await res.json()
+        return json.secure_url
+    } catch (error) {
+        console.error("Erro ao enviar imagem para o Cloudinary", error);
+        return null;
+    }
+}
+
+async function handleImageChange(e){
+    const file = e.target.files[0]
+    if (!file) return
+    const imageUrl = await uploadToCloudnary(file)
+    if(imageUrl){
+        setUser(prev => ({
+            ...prev,
+            user_photo_url: imageUrl
+        }));
+    }
+}
 
     return(
         <form className="font-poppins py-[40px] px-[54px]" >
             <div className="flex justify-between">
                 <div className="flex items-center gap-10 mb-[20px] lg:mb-[30px]">
-                    <img src={user.user_photo_url || IconProfile} alt="profile-icon" className={` ${isEditing ? "hover:cursor-pointer":""} rounded-full  w-[100px] lg:w-[160px] h-[100px] lg:h-[160px] object-cover `}/>
+                    
+                    <img src={user.user_photo_url}  onClick={()=>{if(isEditing) document.getElementById("fileInput").click()}} className={` ${isEditing ? "hover:cursor-pointer":""} rounded-full  w-[100px] lg:w-[160px] h-[100px] lg:h-[160px] object-cover `}/>
                     <h1 className="hidden sm:block text-[40px]">Meu Perfil</h1>
                 </div>
+                <input type="file" accept="image/*" id="fileInput" onChange={handleImageChange} className="hidden"/>
+
                 {
                     !isEditing && (
                          <img src={EditPencil} alt="" onClick={editingMode} className="w-[30px] h-[30px] md:w-[40px] md:h-[40px] cursor-pointer" />

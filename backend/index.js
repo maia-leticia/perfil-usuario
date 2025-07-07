@@ -49,6 +49,7 @@ app.post("/usuario", (req,res) => {
         user_neighborhood, 
         user_city, 
         user_bio,
+        user_photo_url,
     } = req.body
 
     const sql = `
@@ -59,6 +60,7 @@ app.post("/usuario", (req,res) => {
             user_street=?, 
             user_neighborhood=?, 
             user_city=?, 
+            user_photo_url=?,
             user_bio=?
         WHERE
             user_id = 1
@@ -70,6 +72,7 @@ app.post("/usuario", (req,res) => {
         user_street, 
         user_neighborhood, 
         user_city, 
+        user_photo_url,
         user_bio,
     ]
 

@@ -41,3 +41,43 @@ app.get("/usuario", (req,res)=>{
     })
 })
 
+app.post("/usuario", (req,res) => {
+    const{
+        user_name, 
+        user_age, 
+        user_street, 
+        user_neighborhood, 
+        user_city, 
+        user_bio,
+    } = req.body
+
+    const sql = `
+        UPDATE perfil_usuario_db
+        SET
+            user_name=?,
+            user_age=?, 
+            user_street=?, 
+            user_neighborhood=?, 
+            user_city=?, 
+            user_bio=?
+        WHERE
+            user_id = 1
+    `
+
+    const values = [
+        user_name, 
+        user_age, 
+        user_street, 
+        user_neighborhood, 
+        user_city, 
+        user_bio,
+    ]
+
+    db.query(sql, values, (err, result) =>{
+        if(err){
+            console.error("Erro ao atualizar o banco de dados!")
+            return res.status(500).json({erro: "Erro ao atualizar dados"})
+        }
+        res.json({mensagem: "Dados atualizados com sucesso!"})
+    })
+})

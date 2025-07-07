@@ -99,14 +99,20 @@ useEffect(()=>{
                     <textarea name="user_bio" value={user.user_bio} onChange={handleChange} disabled={!isEditing}  className={`flex flex-1 h-[100%] resize-none focus:outline-none ${isEditing ? "" : "text-[#4B5563]"}`}></textarea>
                 </div>
                 {
-                    isEditing && (
+                    isEditing ? 
+                    
                         <div className="flex justify-end gap-4">
                             <button className="w-[18vw] cursor-pointer md:h-[48px] h-[35px]  text-[#FFFFFF] rounded-[40px] bg-[#FF0000]" onClick={handleCancel}>Cancelar</button>
                             <button className="w-[18vw] cursor-pointer md:h-[48px] h-[35px] text-[#FFFFFF] rounded-[40px] bg-[#1AABF4]" onClick={handleSave}>Salvar</button>
                         </div>
-                    )
+                     :
+                    
+                    <span className="text-[14px] text-green-600 flex justify-end">{message}</span>
+                    
+
+
                 }
-                <span className="text-[14px] text-green-600 flex justify-end">{message}</span>
+
             </div>
         </form>
     )

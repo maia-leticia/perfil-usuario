@@ -177,7 +177,7 @@ useEffect(()=>{
                     disabled={!isEditing}
                 />
 
-                <div className={`flex flex-col h-[150px] mt-[15px] mb-2 px-[24px] py-[10px] rounded-[28px] ${isEditing ? "border-[#1A1A1A] border" : ""}`}>
+                <div className={`flex flex-col h-[150px] mt-[15px] mb-2 md:px-[24px] md:py-[10px] rounded-[28px] ${isEditing ? "border-[#1A1A1A] border px-[24px] py-[10px]" : ""}`}>
                     <label htmlFor="user_bio" className="font-semibold mb-[10px]" >Biografia:</label>         
                     <textarea name="user_bio" value={user.user_bio} onChange={handleChange} disabled={!isEditing}  className={`flex flex-1 h-[100%] resize-none focus:outline-none ${isEditing ? "" : "text-[#4B5563]"}`}></textarea>
                 </div>

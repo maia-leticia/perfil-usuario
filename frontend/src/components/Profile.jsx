@@ -186,7 +186,7 @@ useEffect(()=>{
                     <span className={`text-[12px] ${message.includes("Erro") ? "text-red-600" : "text-green-600"}`}>{message}</span>
                     {isEditing && (
                             <div className="flex justify-end gap-4">
-                                <button className="w-[18vw] cursor-pointer md:h-[48px] h-[35px]  text-[#FFFFFF] rounded-[40px] bg-[#FF0000]" onClick={handleCancel}>Cancelar</button>
+                                <button className="w-[18vw] cursor-pointer md:h-[48px] h-[35px] text-[#FFFFFF] rounded-[40px] bg-[#FF0000]" onClick={handleCancel}>Cancelar</button>
                                 <button className="w-[18vw] cursor-pointer md:h-[48px] h-[35px] text-[#FFFFFF] rounded-[40px] bg-[#1AABF4]" onClick={handleSave}>Salvar</button>
                             </div>
                     )}

@@ -4,3 +4,10 @@
 @theme {
   --font-poppins: "Poppins", "sans-serif"; 
 }
+
+html, body {
+  padding: 0;
+  margin: 0;
+  height: 100%;
+  background-color: #047790; 
+}

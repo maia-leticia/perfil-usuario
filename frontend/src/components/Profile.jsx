@@ -1,6 +1,7 @@
 import EditPencil from "../assets/edit.png"
 import { useState, useEffect, useRef } from "react"
 import InputField from "./InputField.jsx"
+const API_URL = import.meta.env.VITE_API_URL || "http://localhost:3001"
 
 function Profile(){
 
@@ -65,7 +66,7 @@ function handleChange(e){
 }
 
 function handleCancel(){
-    fetch("http://localhost:3001/usuario")
+    fetch(`${API_URL}/usuario`)
     .then(res => res.json())
     .then(data => {
         setUser(data)
@@ -100,7 +101,7 @@ function handleSave(e){
 
     console.log("Enviando dados para salvar:", user);
 
-    fetch("http://localhost:3001/usuario", {
+    fetch(`${API_URL}/usuario`, {
         method: "POST",
         headers: {
             "Content-Type": "application/json"
@@ -119,7 +120,7 @@ function handleSave(e){
 }
 
 useEffect(()=>{
-    fetch("http://localhost:3001/usuario")
+    fetch(`${API_URL}/usuario`)
     .then(res => res.json())
     .then(data => setUser(data))
     .catch(err => console.error("Erro ao buscar usuário", err))

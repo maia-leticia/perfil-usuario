@@ -98,6 +98,22 @@ O frontend estará disponível em: `http://localhost:5173`
 
 ---
 
+## Deploy
+
+O projeto está hospedado e funcionando online:
+
+🔗 **Frontend (Vercel):** [https://perfil-usuario-bgoyoh5gm-leticias-projects-fff00cd0.vercel.app/]
+
+
+---
+
+##  Integração com Backend (Railway)
+
+O backend Node.js com banco de dados MySQL está hospedado na plataforma **Railway**.
+
+Para integrar o frontend com o backend em produção, foi utilizada uma variável de ambiente.
+
+
 ## Observações
 
 - Os dados são salvos para um único usuário (ID 1), conforme implementação deste projeto.

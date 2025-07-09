@@ -4,12 +4,6 @@ Este projeto é uma solução para o desafio técnico da Sync360.io. O objetivo 
 
 ---
 
-## Pré-requisitos
-
-- Node.js 18 ou superior instalado na máquina
-
----
-
 ## Funcionalidades
 
 - Exibição das informações do usuário:
@@ -45,6 +39,12 @@ Este projeto é uma solução para o desafio técnico da Sync360.io. O objetivo 
 
 ## Como rodar localmente
 
+### Pré-requisitos
+
+- Node.js 18 ou superior instalado na máquina
+
+---
+
 ### 1. Baixe o projeto e extraia os arquivos
 
 A estrutura do projeto está organizada assim:
@@ -77,7 +77,7 @@ O backend estará rodando em: `http://localhost:3001`
 
 ### 3. Inicie o frontend
 
-1. Abra o terminal na pasta `frontend`
+1. Abra outro terminal na pasta `frontend`
 2. Instale as dependências:
 
 npm install

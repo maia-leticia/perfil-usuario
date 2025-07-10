@@ -102,7 +102,7 @@ O frontend estará disponível em: `http://localhost:5173`
 
 O projeto está hospedado e funcionando online:
 
-🔗 **Frontend (Vercel):** [https://perfil-usuario-kiq1qglwf-leticias-projects-fff00cd0.vercel.app/]
+🔗 **Frontend (Vercel):** [https://perfil-usuario-black.vercel.app/]
 
 
 ---
